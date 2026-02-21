@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NA Security Service | Zintozonke Trading Enterprise</title>
+    <meta name="description" content="NA Security Service (Zintozonke Trading Enterprise) is a 100% Black-owned B-BBEE Level 1 firm in Durban. Specialized in ICT, PPE clothing, and general industrial supply.">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+    
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            50: '#f0f9ff',
+                            500: '#00a1ff', 
+                            900: '#1e3a8a', 
+                        },
+                        night: {
+                            DEFAULT: '#020617', 
+                            card: '#0a0f1d',
+                            border: '#1e293b',
+                            accent: '#ffffff'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            transition: background-color 0.4s ease, color 0.4s ease;
+            -webkit-tap-highlight-color: transparent;
+            background-color: #020617; /* Dark start to prevent white flash */
+        }
+
+        .dark body { background-color: #020617; color: #f8fafc; }
+
+        /* Robust Fallback for Hero when video is loading or fails */
+        .hero-fallback {
+            background: linear-gradient(135deg, #020617 0%, #1e3a8a 100%);
+            background-size: cover;
+            background-position: center;
+        }
+
+        /* Animations */
+        @keyframes text-glow {
+            0%, 100% { filter: drop-shadow(0 0 2px rgba(255, 255, 255, 0.1)); }
+            50% { filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.3)); }
+        }
+        .dark .animate-text-glow { animation: text-glow 4s ease-in-out infinite; }
+        
+        @keyframes pulse-whatsapp {
+            0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.6); }
+            70% { transform: scale(1.05); box-shadow: 0 0 0 20px rgba(37, 211, 102, 0); }
+            100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); }
+        }
+        .whatsapp-pulse { 
+            animation: pulse-whatsapp 2s infinite; 
+            background-color: #25D366; 
+            color: white; 
+        }
+
+        .text-shimmer {
+            background: linear-gradient(to right, #334155 20%, #ffffff 40%, #ffffff 60%, #334155 80%);
+            background-size: 200% auto;
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: textShimmer 4s linear infinite;
+        }
+
+        @keyframes textShimmer { to { background-position: 200% center; } }
+
+        .glass-card {
+            backdrop-filter: blur(12px);
+            transition: all 0.3s ease;
+        }
+        .dark .glass-card {
+            background: rgba(10, 15, 29, 0.85); 
+            border: 1px solid rgba(255, 255, 255, 0.04);
+        }
+        
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s cubic-bezier(0.17, 0.55, 0.55, 1);
+        }
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        #preloader {
+            position: fixed;
+            inset: 0;
+            z-index: 9999;
+            background: #020617;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: opacity 0.5s ease, visibility 0.5s ease;
+        }
+        #preloader.loaded { opacity: 0; visibility: hidden; pointer-events: none; }
+
+        .video-container {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            z-index: -1;
+            overflow: hidden;
+        }
+        .video-container video {
+            min-width: 100%; min-height: 100%;
+            width: auto; height: auto;
+            position: absolute;
+            top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+            object-fit: cover;
+        }
+
+        .faq-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .faq-item.active .faq-content { max-height: 300px; }
+        .faq-item.active .faq-icon { transform: rotate(180deg); }
+
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: #020617; }
+        ::-webkit-scrollbar-thumb { background: #1e293b; border-radius: 10px; }
+
+        @media (max-width: 640px) {
+            .hero-text { font-size: 2.25rem !important; line-height: 1.2 !important; }
+            .section-padding { padding-top: 3.5rem; padding-bottom: 3.5rem; }
+        }
+    </style>
+</head>
+<body class="overflow-x-hidden dark" id="home">
+
+    <!-- Preloader -->
+    <div id="preloader">
+        <div class="relative w-24 h-24 flex flex-col items-center justify-center">
+            <div class="absolute inset-0 border-4 border-white/5 rounded-full"></div>
+            <div class="absolute inset-0 border-4 border-t-blue-500 rounded-full animate-spin"></div>
+            <span class="mt-32 text-[10px] text-white uppercase tracking-[0.5em] font-black text-center whitespace-nowrap">NA SECURITY</span>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <nav id="navbar" class="fixed w-full z-50 py-2 sm:py-4 transition-all duration-700 top-0 sm:top-4">
+        <div class="max-w-7xl mx-auto px-3 sm:px-6">
+            <div class="flex justify-between items-center px-5 sm:px-8 py-3 sm:py-5 rounded-2xl border border-white/10 backdrop-blur-2xl bg-night/90 shadow-2xl text-white">
+                <div class="flex flex-col cursor-pointer" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">
+                    <span class="font-black text-base sm:text-2xl tracking-tighter uppercase leading-none">NA SECURITY</span>
+                    <span class="text-[7px] sm:text-[9px] font-bold tracking-[0.3em] uppercase opacity-50">Zintozonke Trading</span>
+                </div>
+
+                <div class="hidden lg:flex items-center space-x-10">
+                    <a href="#home" class="text-[11px] font-black uppercase tracking-widest hover:text-blue-400 transition-colors">Home</a>
+                    <a href="#services" class="text-[11px] font-black uppercase tracking-widest hover:text-blue-400 transition-colors">Services</a>
+                    <a href="#about" class="text-[11px] font-black uppercase tracking-widest hover:text-blue-400 transition-colors">About Us</a>
+                    <a href="#contact" class="text-[11px] font-black uppercase tracking-widest hover:text-blue-400 transition-colors">Contacts</a>
+                </div>
+
+                <div class="lg:hidden flex items-center space-x-4">
+                    <button id="menu-toggle" class="p-2 border border-white/10 rounded-lg"><i data-lucide="menu" class="w-5 h-5"></i></button>
+                </div>
+            </div>
+        </div>
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden absolute top-20 left-3 right-3 bg-night/95 border border-white/10 rounded-3xl p-8 shadow-2xl text-center backdrop-blur-xl">
+            <div class="flex flex-col space-y-8">
+                <a href="#home" class="mobile-link text-sm font-black uppercase tracking-widest text-white">Home</a>
+                <a href="#services" class="mobile-link text-sm font-black uppercase tracking-widest text-white">Services</a>
+                <a href="#about" class="mobile-link text-sm font-black uppercase tracking-widest text-white">About Us</a>
+                <a href="#contact" class="mobile-link text-sm font-black uppercase tracking-widest text-white border-t border-white/10 pt-4">Contacts</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="min-h-screen flex items-center relative overflow-hidden px-5 sm:px-6 hero-fallback">
+        <div class="video-container">
+            <video autoplay muted loop playsinline poster="https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&q=80&w=2000">
+                <source src="https://assets.mixkit.co/videos/preview/mixkit-delivery-truck-driving-on-highway-at-night-42247-large.mp4" type="video/mp4">
+            </video>
+            <div class="absolute inset-0 bg-slate-950/85 backdrop-blur-[1px]"></div>
+        </div>
+        
+        <div class="max-w-7xl mx-auto grid lg:grid-cols-2 gap-12 items-center relative z-10 w-full pt-16 sm:pt-24">
+            <div class="space-y-6 sm:space-y-10 reveal text-center lg:text-left">
+                <div class="inline-flex items-center gap-3 px-4 py-2 bg-blue-500/20 border border-blue-400/30 rounded-full">
+                    <span class="w-2 h-2 bg-blue-500 rounded-full animate-pulse"></span>
+                    <span class="text-blue-300 text-[9px] sm:text-[10px] font-black uppercase tracking-[0.3em]">🇿🇦 B-BBEE L1 | CSD REGISTERED</span>
+                </div>
+                <h1 class="hero-text text-4xl sm:text-8xl font-black tracking-tighter uppercase leading-[1.0] text-white">
+                    Innovating <br />
+                    <span class="text-shimmer animate-text-glow">Supply Chains</span> <br />
+                    for Africa.
+                </h1>
+                <p class="text-sm sm:text-xl font-medium text-slate-300 max-w-xl mx-auto lg:mx-0 leading-relaxed px-2 sm:px-0">
+                    NA Security Service: Durban's premier multi-sectoral partner for ICT infrastructure, certified PPE, and professional logistics. 
+                </p>
+                <div class="flex flex-col sm:flex-row justify-center lg:justify-start gap-4 pt-4 sm:pt-6 px-10 sm:px-0">
+                    <a href="#services" class="px-8 sm:px-12 py-4 sm:py-6 bg-white text-night font-black rounded-2xl sm:rounded-[2rem] shadow-2xl uppercase tracking-widest text-[10px] sm:text-xs transition-all hover:scale-105 active:scale-95">Our Services</a>
+                    <a href="#contact" class="px-8 sm:px-12 py-4 sm:py-6 glass-card text-white font-black rounded-2xl sm:rounded-[2rem] border border-white/20 uppercase tracking-widest text-[10px] sm:text-xs transition-all hover:scale-105 active:scale-95">Consult Now</a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Services Section -->
+    <section id="services" class="py-16 sm:py-32 relative bg-night px-6 overflow-hidden">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-16 sm:mb-24 reveal">
+                <h2 class="text-blue-500 font-black tracking-[0.4em] uppercase text-[10px] sm:text-[11px] mb-4">Service Matrix</h2>
+                <h3 class="text-3xl sm:text-7xl font-black tracking-tighter uppercase leading-none text-white text-shimmer">Core Capabilities</h3>
+                <div class="w-20 sm:w-24 h-1.5 sm:h-2 bg-blue-600 mx-auto rounded-full mt-6 opacity-50"></div>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-12">
+                <!-- 1. ICT -->
+                <div class="glass-card rounded-3xl border border-white/5 overflow-hidden reveal group shadow-xl">
+                    <div class="h-52 sm:h-64 overflow-hidden bg-slate-800">
+                        <img src="https://images.unsplash.com/photo-1496181133206-80ce9b88a853?auto=format&fit=crop&q=80&w=800" alt="ICT" class="w-full h-full object-cover opacity-60 group-hover:scale-110 transition-transform duration-700">
+                    </div>
+                    <div class="p-8 sm:p-10">
+                        <h4 class="text-xl sm:text-2xl font-black mb-3 uppercase text-white tracking-tighter flex items-center gap-3">
+                            <i data-lucide="laptop" class="text-blue-500 w-6 h-6"></i> ICT Solutions
+                        </h4>
+                        <p class="text-xs sm:text-sm font-medium opacity-60 text-slate-300">Enterprise computing, networking hardware, and specialized software infrastructure.</p>
+                    </div>
+                </div>
+
+                <!-- 2. PPE -->
+                <div class="glass-card rounded-3xl border border-white/5 overflow-hidden reveal group shadow-xl" style="transition-delay: 100ms;">
+                    <div class="h-52 sm:h-64 overflow-hidden bg-slate-800">
+                        <img src="https://images.unsplash.com/photo-1621905252507-b354bcadc691?auto=format&fit=crop&q=80&w=800" alt="PPE" class="w-full h-full object-cover opacity-60 group-hover:scale-110 transition-transform duration-700">
+                    </div>
+                    <div class="p-8 sm:p-10">
+                        <h4 class="text-xl sm:text-2xl font-black mb-3 uppercase text-white tracking-tighter flex items-center gap-3">
+                            <i data-lucide="shield" class="text-blue-500 w-6 h-6"></i> PPE Workwear
+                        </h4>
+                        <p class="text-xs sm:text-sm font-medium opacity-60 text-slate-300">SABS certified industrial clothing, high-visibility gear, and safety apparel.</p>
+                    </div>
+                </div>
+
+                <!-- 3. General Trading -->
+                <div class="glass-card rounded-3xl border border-white/5 overflow-hidden reveal group shadow-xl" style="transition-delay: 200ms;">
+                    <div class="h-52 sm:h-64 overflow-hidden bg-slate-800">
+                        <img src="https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&q=80&w=800" alt="General Trading" class="w-full h-full object-cover opacity-60 group-hover:scale-110 transition-transform duration-700">
+                    </div>
+                    <div class="p-8 sm:p-10">
+                        <h4 class="text-xl sm:text-2xl font-black mb-3 uppercase text-white tracking-tighter flex items-center gap-3">
+                            <i data-lucide="truck" class="text-blue-500 w-6 h-6"></i> General Supply
+                        </h4>
+                        <p class="text-xs sm:text-sm font-medium opacity-60 text-slate-300">Bulk procurement and nationwide distribution of commercial merchandise.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-20 sm:py-40 bg-night border-y border-white/5 px-6">
+        <div class="max-w-7xl mx-auto grid lg:grid-cols-2 gap-16 sm:gap-24 items-center">
+            <div class="reveal space-y-10 order-2 lg:order-1">
+                <div class="space-y-4 text-center lg:text-left">
+                    <h2 class="text-blue-500 font-black tracking-[0.4em] uppercase text-[11px]">Professional Profile</h2>
+                    <h3 class="text-3xl sm:text-6xl font-black tracking-tighter uppercase leading-tight text-white">Turnkey Provision <br />in Durban.</h3>
+                </div>
+                
+                <div class="space-y-6 text-sm sm:text-lg opacity-70 leading-relaxed font-medium text-slate-300 text-justify lg:text-left">
+                    <p>Established in 2025, <strong>NA Security Service</strong> (trading as <strong>Zintozonke Trading Enterprise</strong>) has rapidly built a footprint as Durban's reliable 100% Black-owned procurement hub.</p>
+                    
+                    <p>We serve the government and private sector with clinical precision, providing Level 1 B-BBEE status to maximize our partners' procurement efficiency and scorecards.</p>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 pt-10">
+                        <div class="p-6 glass-card rounded-2xl border border-white/5 shadow-lg">
+                            <h4 class="font-black uppercase text-[10px] tracking-widest mb-3 text-blue-500">Compliance Code</h4>
+                            <p class="text-[11px] leading-relaxed">Full CSD Registration (MAAA1691818) and SARS compliance for seamless site-handover.</p>
+                        </div>
+                        <div class="p-6 glass-card rounded-2xl border border-white/5 shadow-lg">
+                            <h4 class="font-black uppercase text-[10px] tracking-widest mb-3 text-blue-500">Distribution Node</h4>
+                            <p class="text-[11px] leading-relaxed">Strategically based in Durban Central to facilitate rapid logistics across KwaZulu-Natal.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="relative reveal order-1 lg:order-2">
+                <div class="aspect-square rounded-[3rem] sm:rounded-[4rem] overflow-hidden shadow-2xl border-4 sm:border-8 border-white/5">
+                    <img src="https://images.unsplash.com/photo-1521737604893-d14cc237f11d?auto=format&fit=crop&q=80&w=1200" class="w-full h-full object-cover" alt="Enterprise">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="py-20 sm:py-32 bg-night border-t border-white/5 px-6">
+        <div class="max-w-4xl mx-auto">
+            <h2 class="text-blue-500 font-black tracking-[0.4em] uppercase text-[10px] text-center mb-12">Common Inquiries</h2>
+            <div class="space-y-5 reveal">
+                <div class="faq-item glass-card rounded-2xl p-6 sm:p-8 cursor-pointer border border-white/5 active">
+                    <div class="flex justify-between items-center gap-4" onclick="this.parentElement.classList.toggle('active')">
+                        <h4 class="font-black text-xs sm:text-sm uppercase tracking-widest text-white leading-tight">National Registry Status</h4>
+                        <i data-lucide="chevron-down" class="faq-icon text-blue-500 transition-transform"></i>
+                    </div>
+                    <div class="faq-content text-slate-400">
+                        <p class="pt-6 text-xs sm:text-sm leading-relaxed">We are fully registered with the National Treasury CSD. Our Supplier No is <strong>MAAA1691818</strong>, making us eligible for all state-level procurement.</p>
+                    </div>
+                </div>
+                <div class="faq-item glass-card rounded-2xl p-6 sm:p-8 cursor-pointer border border-white/5">
+                    <div class="flex justify-between items-center gap-4" onclick="this.parentElement.classList.toggle('active')">
+                        <h4 class="font-black text-xs sm:text-sm uppercase tracking-widest text-white leading-tight">Supply Network</h4>
+                        <i data-lucide="chevron-down" class="faq-icon text-blue-500 transition-transform"></i>
+                    </div>
+                    <div class="faq-content text-slate-400">
+                        <p class="pt-6 text-xs sm:text-sm leading-relaxed">While based in Durban, we deliver ICT, PPE, and general supplies nationwide to ensure your project's logistical requirements are met everywhere.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contacts Section -->
+    <section id="contact" class="py-20 sm:py-40 bg-night border-t border-white/5 px-6">
+        <div class="max-w-7xl mx-auto grid lg:grid-cols-2 gap-16 items-center">
+            <div class="reveal space-y-10 text-center lg:text-left text-white">
+                <h3 class="text-5xl sm:text-8xl font-black tracking-tighter uppercase leading-none">Partner <br /><span class="text-shimmer">With Us.</span></h3>
+                <div class="space-y-6 sm:space-y-8">
+                    <div class="flex items-center space-x-5 group cursor-pointer justify-center lg:justify-start" onclick="location.href='tel:0676168118'">
+                        <div class="w-12 h-12 sm:w-16 sm:h-16 glass-card rounded-2xl flex items-center justify-center text-blue-500 group-hover:bg-blue-600 group-hover:text-white transition-all shadow-xl border border-blue-500/10">
+                            <i data-lucide="phone"></i>
+                        </div>
+                        <div class="text-left">
+                            <p class="text-[9px] font-black uppercase opacity-40 mb-1">Direct Line</p>
+                            <p class="text-xl sm:text-2xl font-black">067 616 8118</p>
+                        </div>
+                    </div>
+                    <div class="flex items-center space-x-5 group cursor-pointer justify-center lg:justify-start" onclick="location.href='mailto:akwandeautumn@gmail.com'">
+                        <div class="w-12 h-12 sm:w-16 sm:h-16 glass-card rounded-2xl flex items-center justify-center text-blue-500 group-hover:bg-blue-600 group-hover:text-white transition-all shadow-xl border border-blue-500/10">
+                            <i data-lucide="mail"></i>
+                        </div>
+                        <div class="text-left">
+                            <p class="text-[9px] font-black uppercase opacity-40 mb-1">Official RFQ</p>
+                            <p class="text-sm sm:text-lg font-bold lowercase">akwandeautumn@gmail.com</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="glass-card p-8 sm:p-16 rounded-[3rem] shadow-2xl border border-white/5">
+                <form onsubmit="event.preventDefault(); this.querySelector('button').innerText='SENT ✓';" class="space-y-6">
+                    <input type="text" placeholder="ENTITY NAME" class="w-full bg-white/5 rounded-2xl p-6 text-sm outline-none focus:ring-2 focus:ring-blue-500 uppercase font-black tracking-widest text-white border border-white/10" required />
+                    <textarea placeholder="DESCRIBE RFQ REQUIREMENTS" class="w-full bg-white/5 rounded-2xl p-6 text-sm outline-none focus:ring-2 focus:ring-blue-500 h-32 uppercase font-bold tracking-widest text-white border border-white/10" required></textarea>
+                    <button type="submit" class="w-full bg-blue-600 text-white font-black py-6 rounded-[2rem] shadow-2xl hover:bg-blue-700 transition-all uppercase tracking-widest text-xs">Send Inquiry</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-16 sm:py-24 bg-night border-t border-white/5 text-center px-6">
+        <div class="max-w-7xl mx-auto text-white">
+            <div class="flex flex-col items-center gap-6 mb-12">
+                <div class="w-16 h-16 bg-white/5 rounded-2xl flex items-center justify-center text-blue-500 font-black border border-white/10">NA</div>
+                <h4 class="text-xl font-black tracking-tighter uppercase">NA SECURITY SERVICE</h4>
+            </div>
+            <p class="text-[9px] sm:text-[10px] font-bold tracking-[0.4em] opacity-30 mb-2 uppercase">MAAA1691818 • DURBAN, ZA</p>
+            <p class="text-[8px] sm:text-[9px] font-medium opacity-10 tracking-[0.6em]">© 2026 ZINTOZONKE TRADING ENTERPRISE.</p>
+        </div>
+    </footer>
+
+    <!-- Official WhatsApp -->
+    <a href="https://wa.me/27676168118" target="_blank" class="fixed bottom-6 right-6 sm:bottom-12 sm:right-12 z-[100] w-14 h-14 sm:w-20 sm:h-20 rounded-full flex items-center justify-center shadow-2xl whatsapp-pulse" id="floating-wa">
+        <svg viewBox="0 0 24 24" class="w-8 h-8 sm:w-11 sm:h-11" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L0 24l6.335-1.662c1.72.937 3.659 1.43 5.623 1.43h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+    </a>
+
+    <script>
+        lucide.createIcons();
+
+        // Preloader Logic
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                document.getElementById('preloader').classList.add('loaded');
+            }, 600);
+        });
+        // Safety timeout for preloader
+        setTimeout(() => document.getElementById('preloader').classList.add('loaded'), 2500);
+
+        // Mobile Menu Logic
+        const menuBtn = document.getElementById('menu-toggle');
+        const mobileMenu = document.getElementById('mobile-menu');
+        if (menuBtn && mobileMenu) {
+            menuBtn.onclick = (e) => {
+                e.stopPropagation();
+                mobileMenu.classList.toggle('hidden');
+            };
+            document.querySelectorAll('.mobile-link').forEach(l => {
+                l.onclick = () => mobileMenu.classList.add('hidden');
+            });
+            document.addEventListener('click', () => mobileMenu.classList.add('hidden'));
+        }
+
+        // Reveal Animations
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+            });
+        }, { threshold: 0.1 });
+        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+    </script>
+</body>
+</html>
